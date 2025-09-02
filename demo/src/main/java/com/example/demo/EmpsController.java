@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+public class  {
 
+    
+}
 
 
 @RestController
@@ -41,10 +44,33 @@ public String addempl(@RequestBody Empl e){
     return "Emply added successfull" ;
 }
 
-@RequestMapping(path="/delete", method=RequestMethod.DELETE)
-public String delempl(@RequestBody Empl em) {
-    emps.removeIf(e -> e.getName().equals(em.getName()));
-    return "deleted";
+
+// @RequestMapping(path="/add", method=RequestMethod.POST)
+// public String addAllEmps(@RequestBody List<Empl> newEmps) {
+//     emps.addAll(newEmps);
+//     return newEmps.size() + " employees added successfully!";
+// }
+
+@DeleteMapping("/delete/{id}")
+public String delempl(@PathVariable int id) {
+    boolean removed = emps.removeIf(e -> e.getId() == id);
+    return removed ? "Employee deleted successfully" : "Employee not found";
 }
+
+
+@RequestMapping(path="/edit", method=RequestMethod.PUT)
+public String editempl(@RequestBody Empl em) {
+    for (Empl e : emps) {
+        if (e.getId() == em.getId()) {   // match by ID
+            e.setName(em.getName());
+            e.setSalary(em.getSalary());
+            e.setDepartment(em.getDepartment());
+            return "Employee updated successfully";
+        }
+    }
+    return "Employee not found";
+}
+
+
 
 }
