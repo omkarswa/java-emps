@@ -17,10 +17,18 @@ public class EmpsController {
 
     ArrayList<Empl> emps = new ArrayList<>();
 
-    public EmpsController() {
-        emps.add(new Empl(1, "nirvikar", 50000, "comps"));
-        emps.add(new Empl(2, "Tanmay", 500000, "comps"));
-    }
+  public EmpsController() {
+    emps.add(new Empl(1, "Nirvikar", 50000, "CSE"));
+    emps.add(new Empl(2, "Tanmay", 500000, "IT"));
+    emps.add(new Empl(3, "Renuku", 45000, "HR"));
+    emps.add(new Empl(4, "Roman", 80000, "Finance"));
+    emps.add(new Empl(5, "Harley Stienfled", 60000, "Design"));
+    emps.add(new Empl(6, "Christian Bale", 120000, "Marketing"));
+    emps.add(new Empl(7, "Al Pacino", 150000, "Management"));
+    emps.add(new Empl(8, "Irrfan", 70000, "Research"));
+    emps.add(new Empl(9, "Jeff Bezos", 1000000, "Executive"));
+}
+
 
     // List all employees
     @RequestMapping(path="/Listing", method=RequestMethod.GET)
