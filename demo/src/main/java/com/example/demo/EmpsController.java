@@ -1,14 +1,17 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")  // frontend allowed
@@ -74,4 +77,13 @@ public class EmpsController {
         boolean removed = emps.removeIf(e -> e.getId() == id);
         return removed ? "Employee deleted successfully" : "Employee not found";
     }
+
+
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+ public ArrayList<Empl> searchEmployees(@RequestParam String keyword) {
+    return emps.stream()
+            .filter(emp -> emp.getName().toLowerCase().contains(keyword.toLowerCase()))
+            .collect(Collectors.toCollection(ArrayList::new));
+}
+
 }
